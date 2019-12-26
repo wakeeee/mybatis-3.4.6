@@ -17,6 +17,7 @@ package org.apache.ibatis.logging;
 
 /**
  * @author Clinton Begin
+ * Mybatis定义了4种日志级别,error debug trace warn
  */
 public interface Log {
 

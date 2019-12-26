@@ -31,7 +31,7 @@ public class Slf4jImpl implements Log {
 
   public Slf4jImpl(String clazz) {
     Logger logger = LoggerFactory.getLogger(clazz);
-
+    //
     if (logger instanceof LocationAwareLogger) {
       try {
         // check for slf4j >= 1.6 method signature
