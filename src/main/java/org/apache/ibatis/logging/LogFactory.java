@@ -32,7 +32,7 @@ public final class LogFactory {
   //最终使用的日志框架(比如log4j)对应的Log接口实现类(Log4jImpl)的构造器
   private static Constructor<? extends Log> logConstructor;
 
-  //串行实例化日志框架,顺序:slf4j CommonsLogging Log4J2 Log4J JdkLog NoLog
+  //按顺序加载日志框架,顺序:slf4j CommonsLogging Log4J2 Log4J JdkLog NoLog
   //只要有一个日志框架生效,后面的就无效.
   static {
     tryImplementation(new Runnable() {
