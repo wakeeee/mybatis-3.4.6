@@ -27,7 +27,7 @@ import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 
 /**
  * Builds {@link SqlSession} instances.
- *
+ * 建造者模式 创建SqlSessionFactory对象
  * @author Clinton Begin
  */
 public class SqlSessionFactoryBuilder {
@@ -46,6 +46,7 @@ public class SqlSessionFactoryBuilder {
 
   public SqlSessionFactory build(Reader reader, String environment, Properties properties) {
     try {
+      //先解析配置文件,再创建SqlSessionFactory对象.
       XMLConfigBuilder parser = new XMLConfigBuilder(reader, environment, properties);
       return build(parser.parse());
     } catch (Exception e) {
@@ -74,6 +75,7 @@ public class SqlSessionFactoryBuilder {
 
   public SqlSessionFactory build(InputStream inputStream, String environment, Properties properties) {
     try {
+      //先解析配置文件,再创建SqlSessionFactory对象.
       XMLConfigBuilder parser = new XMLConfigBuilder(inputStream, environment, properties);
       return build(parser.parse());
     } catch (Exception e) {
@@ -89,6 +91,8 @@ public class SqlSessionFactoryBuilder {
   }
     
   public SqlSessionFactory build(Configuration config) {
+    //把关于mybatis的配置,先读取到Configuration对象中,再创建SqlSessionFactory对象.
+    //mybatis默认创建的是DefaultSqlSessionFactory类的实例
     return new DefaultSqlSessionFactory(config);
   }
 
