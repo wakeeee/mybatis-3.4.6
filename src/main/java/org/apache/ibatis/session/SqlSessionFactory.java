@@ -24,9 +24,16 @@ import java.sql.Connection;
  *    1.事务相关:是否自动提交事务、事务的隔离级别
  *    2.数据库连接:用配置好的数据源的Connection,还是自定义的Connection
  *    3.语句执行类型:SIMPLE,REUSE,BATCH
- *        3.1.SIMPLE:默认值-简单类型.每次sql的执行,都创建一个PreparedStatement,执行完sql就关闭.
- *        3.2.REUSE:复用类型.这类执行器,在一个Session的生命周期内,会复用PreparedStatement.
- *        3.3.BATCH:批处理类型.
+ *        3.1.SIMPLE:默认值-简单类型.在同一个Session中针对同一条sql,每次该sql的执行,都创建一个PreparedStatement,执行完sql就关闭.
+ *        这样每次执行sql,都会预编译一次
+ *        3.2.REUSE:复用类型.这类执行器,在同一个Session中针对同一条sql,每次该sql的执行,会复用PreparedStatement.
+ *        这样假设一条sql执行多次,使用的是同一个PreparedStatement,仅需要预编译一次.
+ *
+ *        p.s.在实际开发中,一般一条sql仅会执行一次,是否复用PreparedStatement影响不大.
+ *        p.s.同一个SqlSession里的所有sql,使用同一个Connection.
+ *        p.s.不同Session的相同sql,肯定不是同一个Connection,更不可能是同一个PreparedStatement.
+ *
+ *        3.3.BATCH:批处理类型.不仅重用语句,还会执行批量更新.
  *
  *
  * @author Clinton Begin

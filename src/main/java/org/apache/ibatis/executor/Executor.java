@@ -29,6 +29,7 @@ import org.apache.ibatis.transaction.Transaction;
 
 /**
  * @author Clinton Begin
+ * 执行器,SqlSession对数据库的操作,都是通过Executor执行的.一个SqlSession对象包含一个Executor对象.
  */
 public interface Executor {
 

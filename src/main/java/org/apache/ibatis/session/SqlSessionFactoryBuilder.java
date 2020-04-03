@@ -75,7 +75,7 @@ public class SqlSessionFactoryBuilder {
 
   public SqlSessionFactory build(InputStream inputStream, String environment, Properties properties) {
     try {
-      //先解析配置文件,再创建SqlSessionFactory对象.
+      //先创建一个XML文件解析对象,把应用的配置解析出来,再创建SqlSessionFactory对象.
       XMLConfigBuilder parser = new XMLConfigBuilder(inputStream, environment, properties);
       return build(parser.parse());
     } catch (Exception e) {
@@ -89,7 +89,12 @@ public class SqlSessionFactoryBuilder {
       }
     }
   }
-    
+
+  /**
+   * Mybatis创建SqlSessionFactory的必经之路
+   * @param config
+   * @return
+   */
   public SqlSessionFactory build(Configuration config) {
     //把关于mybatis的配置,先读取到Configuration对象中,再创建SqlSessionFactory对象.
     //mybatis默认创建的是DefaultSqlSessionFactory类的实例
